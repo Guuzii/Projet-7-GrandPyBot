@@ -17,7 +17,7 @@ def api():
 
     print('question envoyé par l\'utilisateur : {question}'.format(question=user_question))
 
-    return render_template('base.html', question=user_question)
+    return user_question
 
 if __name__ == "__main__":
     app.run()

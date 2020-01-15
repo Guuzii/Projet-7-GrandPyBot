@@ -67,11 +67,31 @@
             </div>
         </div>
     </header>
-    
-    <section class="page-section">
+
+    <section id="question-answer" class="page-section">
         <div class="container">
             <div class="row">
-                <p>Hello World !</p>
+                <p class="text-left">Que puis-je faire pour toi aujourd'hui mon petit?</p>
+            </div>
+            <hr>
+            <div class="row">
+                <p class="text-right">{{ question }}</p>
+            </div>
+        </div>
+    </section>
+    
+    <section id="form-question" class="page-section">
+        <div class="container">
+            <div class="row">
+                <form>                    
+                    <div class="form-group row">
+                        <label for="question" class="col-sm-2 col-form-label">Votre question :</label>
+                        <div class="col-sm-10">
+                            <input type="text" name="question" id="question" class="form-control" placeholder="Votre question ?"></input>
+                        </div>                        
+                    </div>
+                    <button type="button" id="send-button" class="btn btn-primary">Envoyer</button>  
+                </form>
             </div>
         </div>
     </section>
@@ -81,7 +101,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <!-- <a href="https://github.com/celine-m-s/flask_test_app" class="btn-social btn-outline" target="_blank"><span class="sr-only">Github</span><i class="fa fa-fw fa-github"></i></a> -->
+                        <a href="https://github.com/Guuzii/Projet-7-GrandPyBot" class="btn-social btn-outline" target="_blank"><span class="sr-only">Github</span><i class="fa fa-fw fa-github"></i></a>
                         <hr class="star-light">
                         <span class="italic">Copyright &copy; Erwan MORIO</span>
                         <!-- <p style="font-style:italic; font-size: 14px;"><a href="https://startbootstrap.com/template-overviews/freelancer/">Thème de StartBootstrap</a></p> -->
@@ -106,6 +126,8 @@
 
     <!-- Theme JavaScript -->
     <script src="{{ url_for('static', filename='js/freelancer-theme.min.js') }}"></script>
+
+    <script src="{{ url_for('static', filename='js/test.js') }}"></script>
 
 </body>
 

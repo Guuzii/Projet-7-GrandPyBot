@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
@@ -9,11 +9,15 @@ app.config.from_object('config')
 def index():
     return render_template('base.html')
 
-@app.route('/api')
+@app.route('/api', methods=['POST'])
 def api():
     # appel parser
     # appel APIs (google, wikipedia)
-    return
+    user_question = request.form['question']
+
+    print('question envoyé par l\'utilisateur : {question}'.format(question=user_question))
+
+    return render_template('base.html', question=user_question)
 
 if __name__ == "__main__":
     app.run()

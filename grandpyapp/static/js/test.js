@@ -12,13 +12,14 @@ $('#send-button').click(() => {
     postQuestionToApi();    
 });
 
+
 function postQuestionToApi() {
     let question  = $('#question').val();
 
     $.post(
         '/api', // Le fichier cible côté serveur.
         {
-            question : question // Nous supposons que ce formulaire existe dans le DOM.
+            question : question // Paire clé: valeur à transmettre via la requete
         },
         insertInPage, // Nous renseignons uniquement le nom de la fonction de retour.
         'text' // Format des données reçues.

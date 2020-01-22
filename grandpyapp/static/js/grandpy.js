@@ -27,5 +27,5 @@ function postQuestionToApi() {
 }
 
 function insertInPage(texte) {
-    $('#user-question').text(texte);
+    $('#user-question').text('Savais-tu que ' + texte);
 }

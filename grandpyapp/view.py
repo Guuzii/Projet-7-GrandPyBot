@@ -55,7 +55,7 @@ def api():
 
         page_id = list(wikimedia_result)[0]
 
-        return (wikimedia_result[page_id]['extract'])
+        return ('Savais-tu que ' + wikimedia_result[page_id]['extract'])
 
         # return ('Coordonnées géographique de ' + user_question + ' : Latitude : ' + str(adress_coordinate['latitude']) + ', longitude : ' + str(adress_coordinate['longitude']))
     else:
@@ -63,8 +63,8 @@ def api():
 
 
 def getGrandPyGreating():
-    greating_index = randint(0, len(config.grandPy_greatings) - 1)
-    return config.grandPy_greatings[greating_index]
+    greating_index = randint(0, len(config.GRANDPY_GREATINGS) - 1)
+    return config.GRANDPY_GREATINGS[greating_index]
 
 
 def getAdressCoordinnate(adress):

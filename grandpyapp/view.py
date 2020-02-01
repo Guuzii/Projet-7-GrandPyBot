@@ -24,15 +24,18 @@ def api():
     # Get user question from the post request
     user_question = request.form['question']
 
-    parser = Parser(user_question)
-    googleApi = GoogleApi(parser.parseUserQuestion())
+    parsed_question = Parser(user_question).parseUserQuestion()
+    googleApi = GoogleApi(parsed_question)
 
     adress_coordinate = googleApi.getPlaceCoordinnate()
 
     if (adress_coordinate):
         wikiApi = WikiApi(adress_coordinate['latitude'], adress_coordinate['longitude'])
 
-        return wikiApi.getDataFromPlace()        
+        return {
+            'texte': wikiApi.getDataFromPlace(),
+            'map_query': parsed_question
+        }        
     else:
         return ('Je n\'ai pas saisie la question...')
 

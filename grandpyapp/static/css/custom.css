@@ -35,6 +35,20 @@ footer hr.star-light:after {
   padding: 20px;
 }
 
+.question {
+  font-weight: 600;
+  text-align: right;
+}
+
+.bot-answer {
+  text-align: left;
+}
+
+.map-container {
+  display: flex;
+  justify-content: center;
+}
+
 @media (min-width: 768px) {
   .card #user-name {
     margin-top: 34%;

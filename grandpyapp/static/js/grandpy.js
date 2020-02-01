@@ -24,7 +24,7 @@ function postQuestionToApi() {
             question : question // Paire clé: valeur à transmettre via la requete
         },
         insertResponseInPage, // Nous renseignons uniquement le nom de la fonction de retour.
-        'text' // Format des données reçues.
+        'json' // Format des données reçues.
     );    
 }
 
@@ -33,7 +33,6 @@ function insertQuestionInPage(texte) {
     let sep = document.createElement('hr');
     let question = document.createElement('p');
     question.innerText = texte;
-    question.setAttribute('class', 'text-right');
 
     div.setAttribute('class', 'row question')
     div.append(sep, question)
@@ -41,14 +40,23 @@ function insertQuestionInPage(texte) {
     $('#tchat-box').append(div);
 }
 
-function insertResponseInPage(texte) {
-    let div = document.createElement('div');
+function insertResponseInPage(query_resp) {
+    let resp_div = document.createElement('div');
+    let map_div = document.createElement('div');
+    let map_iframe = document.createElement('iframe');
     let resp = document.createElement('p');
-    resp.innerText = texte;
-    resp.setAttribute('class', 'text-left');
-    
-    div.setAttribute('class', 'row bot-answer')
-    div.append(resp)
+    resp.innerText = query_resp['texte'];
 
-    $('#tchat-box').append(div);
+    map_iframe.setAttribute('width', '800');
+    map_iframe.setAttribute('height', '250');
+    map_iframe.setAttribute('frameborder', '0');
+    map_iframe.setAttribute('src', "https://www.google.com/maps/embed/v1/place?q=" + query_resp['map_query'] + "&key=AIzaSyDP9USsAbkxBmQibnOAYxTnDA01uXyUWRU")
+
+    map_div.setAttribute('class', 'map-container')
+    map_div.append(map_iframe)
+
+    resp_div.setAttribute('class', 'row bot-answer')
+    resp_div.append(resp, map_div)
+
+    $('#tchat-box').append(resp_div);
 }

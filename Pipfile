@@ -9,6 +9,7 @@ pylint = "*"
 [packages]
 flask = "*"
 googlemaps = "*"
+pytest = "*"
 
 [requires]
 python_version = "3.7"

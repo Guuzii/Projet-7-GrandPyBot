@@ -1,4 +1,3 @@
-
 $('#form-question :input').on('keypress', (e) => {
     let keycode = e.keyCode || e.which;
 
@@ -30,18 +29,26 @@ function postQuestionToApi() {
 }
 
 function insertQuestionInPage(texte) {
+    let div = document.createElement('div');
     let sep = document.createElement('hr');
     let question = document.createElement('p');
     question.innerText = texte;
     question.setAttribute('class', 'text-right');
 
-    $('#tchat-box').append(sep, question);
+    div.setAttribute('class', 'row question')
+    div.append(sep, question)
+
+    $('#tchat-box').append(div);
 }
 
 function insertResponseInPage(texte) {
+    let div = document.createElement('div');
     let resp = document.createElement('p');
     resp.innerText = texte;
     resp.setAttribute('class', 'text-left');
+    
+    div.setAttribute('class', 'row bot-answer')
+    div.append(resp)
 
-    $('#tchat-box').append(resp);
+    $('#tchat-box').append(div);
 }

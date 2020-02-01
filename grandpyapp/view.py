@@ -10,7 +10,6 @@ from .apis import GoogleApi, WikiApi
 from .parser import Parser
 
 app = Flask(__name__)
-
 app.config.from_object('config')
 
 @app.route('/')

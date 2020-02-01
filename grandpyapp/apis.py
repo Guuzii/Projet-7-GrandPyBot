@@ -16,7 +16,11 @@ class GoogleApi:
         # Places request to get coordinate
         places_result = self.gmaps.places(self.place)
 
-        if (len(places_result['results']) > 0):        
+        if (len(places_result['results']) > 0):
+            print ({
+                'latitude': str(places_result['results'][0]['geometry']['location']['lat']),
+                'longitude': str(places_result['results'][0]['geometry']['location']['lng'])
+            })      
             return {
                 'latitude': str(places_result['results'][0]['geometry']['location']['lat']),
                 'longitude': str(places_result['results'][0]['geometry']['location']['lng'])

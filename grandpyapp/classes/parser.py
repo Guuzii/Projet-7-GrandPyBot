@@ -17,7 +17,6 @@ class Parser:
                 parsed_string += string + ' '
                 
         parsed_string = parsed_string.lower()
-        parsed_string = parsed_string.strip()       
-
-        print (parsed_string)
+        parsed_string = parsed_string.strip()
+        
         return parsed_string

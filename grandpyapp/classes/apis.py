@@ -8,19 +8,14 @@ import config
 
 class GoogleApi:
 
-    def __init__(self, place):
+    def __init__(self):
         self.gmaps = googlemaps.Client(key=config.GOOGLE_API_KEY)
-        self.place = place
 
-    def getPlaceCoordinnate(self):
+    def getPlaceCoordinnate(self, place):
         # Places request to get coordinate
-        places_result = self.gmaps.places(self.place)
+        places_result = self.gmaps.places(place)
 
-        if (len(places_result['results']) > 0):
-            print ({
-                'latitude': str(places_result['results'][0]['geometry']['location']['lat']),
-                'longitude': str(places_result['results'][0]['geometry']['location']['lng'])
-            })      
+        if (len(places_result['results']) > 0):      
             return {
                 'latitude': str(places_result['results'][0]['geometry']['location']['lat']),
                 'longitude': str(places_result['results'][0]['geometry']['location']['lng'])
@@ -31,8 +26,11 @@ class GoogleApi:
 
 class WikiApi:
 
-    def __init__(self, lat, lng):
-        self.params = {
+    def __init__(self):        
+        pass
+
+    def getDataFromPlace(self, lat, lng):
+        params = {
             'action': 'query',
             'prop': 'extracts',
             'exintro': 'true',
@@ -44,13 +42,12 @@ class WikiApi:
             'format': 'json'
         }
 
-    def getDataFromPlace(self):
-        res = requests.get(url=config.WIKIPEDIA_API_ENDPOINT, params=self.params)
+        res = requests.get(url=config.WIKIPEDIA_API_ENDPOINT, params=params)
         
         try:
             wikimedia_result = res.json()['query']['pages']
         except:
-            return ('Je n\'ai rien trouvé dans un rayon de ' + str(self.params['ggsradius']) + ' mètres.')
+            return ('Je n\'ai rien trouvé dans un rayon de ' + str(params['ggsradius']) + ' mètres.')
 
         page_id = list(wikimedia_result)[0]
 

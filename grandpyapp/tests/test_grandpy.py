@@ -1,10 +1,6 @@
 from ..classes.parser import Parser 
 from ..classes.apis import GoogleApi, WikiApi
 
-from io import BytesIO
-import json
-import urllib.request
-
 def test_parser(): 
     assert Parser().parseUserQuestion('Test1 abord test2;s etre test3  quatre ,:/"') == 'test1 test2 test3'
 

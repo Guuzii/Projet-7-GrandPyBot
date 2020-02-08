@@ -3,11 +3,11 @@ import config
 
 class Parser:
 
-    def __init__(self, string):
-        self.user_question = string
+    def __init__(self):
+        pass
 
-    def parseUserQuestion(self):
-        splited_string = re.sub(r'[^\w\s]', ' ', self.user_question)
+    def parseUserQuestion(self, user_question):
+        splited_string = re.sub(r'[^\w\s]', ' ', user_question)
         splited_string = splited_string.split(' ')
         parsed_string = ''
 

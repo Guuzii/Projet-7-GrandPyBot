@@ -17,6 +17,7 @@ class GoogleApi:
 
         if (len(places_result['results']) > 0):      
             return {
+                'adress': places_result['results'][0]['formatted_address'],
                 'latitude': str(places_result['results'][0]['geometry']['location']['lat']),
                 'longitude': str(places_result['results'][0]['geometry']['location']['lng'])
             }

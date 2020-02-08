@@ -20,16 +20,15 @@ def index():
 def api():
     user_question = request.form['question']
 
-    parsed_question = Parser(user_question).parseUserQuestion()
-    googleApi = GoogleApi()
+    parsed_question = Parser().parseUserQuestion(user_question)
+    adress = GoogleApi().getPlaceCoordinnate(parsed_question)
 
-    adress_coordinate = googleApi.getPlaceCoordinnate(parsed_question)
-
-    if (adress_coordinate):
+    if (adress):
         wikiApi = WikiApi()
 
         return {
-            'texte': wikiApi.getDataFromPlace(adress_coordinate['latitude'], adress_coordinate['longitude']),
+            'adress': adress['adress'],
+            'texte': wikiApi.getDataFromPlace(adress['latitude'], adress['longitude']),
             'map_query': parsed_question
         }        
     else:

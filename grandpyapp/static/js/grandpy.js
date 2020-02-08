@@ -45,7 +45,7 @@ function insertResponseInPage(query_resp) {
     let map_div = document.createElement('div');
     let map_iframe = document.createElement('iframe');
     let resp = document.createElement('p');
-    resp.innerText = query_resp['texte'];
+    resp.innerText = "Voila l'adresse que tu m'a demandé : " + query_resp['adress'] + "\n" + query_resp['texte'];
 
     map_iframe.setAttribute('width', '800');
     map_iframe.setAttribute('height', '250');

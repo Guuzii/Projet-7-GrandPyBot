@@ -35,11 +35,11 @@ def api():
             }        
         else:
             return {
-                'texte': None
+                'texte': 'GoogleApi response == null'
             }
     else:
         return {
-                'texte': None
+                'texte': 'Je n\'ai pas saisie la question...'
             }
 
 

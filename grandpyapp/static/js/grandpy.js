@@ -33,7 +33,7 @@ function insertQuestionInPage(texte) {
     let div = document.createElement('div');
     let sep = document.createElement('hr');
     let question = document.createElement('p');
-    
+
     if (texte && texte.replace(/\s/g, "") != "")
     {
         question.innerText = texte;
@@ -54,13 +54,14 @@ function insertResponseInPage(query_resp) {
     let resp_div = document.createElement('div');
     resp_div.setAttribute('class', 'row bot-answer');
 
-    if (query_resp['texte']) 
+    let resp = document.createElement('p');
+
+    if (query_resp['adress']) 
     {
-        let map_div = document.createElement('div');
-        let map_iframe = document.createElement('iframe');
-        let resp = document.createElement('p');
         resp.innerText = "Voila l'adresse que tu m'a demandé : " + query_resp['adress'] + "\n" + query_resp['texte'];
 
+        let map_div = document.createElement('div');
+        let map_iframe = document.createElement('iframe');
         map_iframe.setAttribute('width', '800');
         map_iframe.setAttribute('height', '250');
         map_iframe.setAttribute('frameborder', '0');
@@ -73,8 +74,7 @@ function insertResponseInPage(query_resp) {
     }
     else 
     {
-        let resp = document.createElement('p');
-        resp.innerText = "Je n\'ai pas saisie la question...";
+        resp.innerText = query_resp['texte'];
 
         resp_div.append(resp);
     }

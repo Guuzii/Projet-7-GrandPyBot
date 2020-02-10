@@ -21,20 +21,26 @@ def index():
 
 @app.route('/api', methods=['POST'])
 def api():
-    print("TEST !!!!!!! : route /api !!")
     user_question = request.form['question']
 
-    parsed_question = Parser().parseUserQuestion(user_question)
-    adress = GoogleApi().getPlaceCoordinnate(parsed_question)
+    if (user_question.strip()):
+        parsed_question = Parser().parseUserQuestion(user_question)
+        adress = GoogleApi().getPlaceCoordinnate(parsed_question)
 
-    if (adress):
-        return {
-            'adress': adress['adress'],
-            'texte': WikiApi().getDataFromPlace(adress['latitude'], adress['longitude']),
-            'map_query': parsed_question
-        }        
+        if (adress):
+            return {
+                'adress': adress['adress'],
+                'texte': WikiApi().getDataFromPlace(adress['latitude'], adress['longitude']),
+                'map_query': parsed_question
+            }        
+        else:
+            return {
+                'texte': None
+            }
     else:
-        return ('Je n\'ai pas saisie la question...')
+        return {
+                'texte': None
+            }
 
 
 def getGrandPyGreating():

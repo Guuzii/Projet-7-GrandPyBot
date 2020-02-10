@@ -29,35 +29,55 @@ function postQuestionToApi() {
 }
 
 function insertQuestionInPage(texte) {
+
     let div = document.createElement('div');
     let sep = document.createElement('hr');
     let question = document.createElement('p');
-    question.innerText = texte;
+    
+    if (texte && texte.replace(/\s/g, "") != "")
+    {
+        question.innerText = texte;
+    }
+    else
+    {
+        question.innerText = 'Question vide';
+    }    
 
-    div.setAttribute('class', 'row question')
-    div.append(sep, question)
+    div.setAttribute('class', 'row question');
+    div.append(sep, question);
 
     $('#tchat-box').append(div);
 }
 
 function insertResponseInPage(query_resp) {
-    console.log(query_resp);
+    
     let resp_div = document.createElement('div');
-    let map_div = document.createElement('div');
-    let map_iframe = document.createElement('iframe');
-    let resp = document.createElement('p');
-    resp.innerText = "Voila l'adresse que tu m'a demandé : " + query_resp['adress'] + "\n" + query_resp['texte'];
+    resp_div.setAttribute('class', 'row bot-answer');
 
-    map_iframe.setAttribute('width', '800');
-    map_iframe.setAttribute('height', '250');
-    map_iframe.setAttribute('frameborder', '0');
-    map_iframe.setAttribute('src', "https://www.google.com/maps/embed/v1/place?q=" + query_resp['map_query'] + "&key=AIzaSyDP9USsAbkxBmQibnOAYxTnDA01uXyUWRU")
+    if (query_resp['texte']) 
+    {
+        let map_div = document.createElement('div');
+        let map_iframe = document.createElement('iframe');
+        let resp = document.createElement('p');
+        resp.innerText = "Voila l'adresse que tu m'a demandé : " + query_resp['adress'] + "\n" + query_resp['texte'];
 
-    map_div.setAttribute('class', 'map-container')
-    map_div.append(map_iframe)
+        map_iframe.setAttribute('width', '800');
+        map_iframe.setAttribute('height', '250');
+        map_iframe.setAttribute('frameborder', '0');
+        map_iframe.setAttribute('src', "https://www.google.com/maps/embed/v1/place?q=" + query_resp['map_query'] + "&key=AIzaSyDP9USsAbkxBmQibnOAYxTnDA01uXyUWRU");
 
-    resp_div.setAttribute('class', 'row bot-answer')
-    resp_div.append(resp, map_div)
+        map_div.setAttribute('class', 'map-container');
+        map_div.append(map_iframe);
 
+        resp_div.append(resp, map_div);
+    }
+    else 
+    {
+        let resp = document.createElement('p');
+        resp.innerText = "Je n\'ai pas saisie la question...";
+
+        resp_div.append(resp);
+    }
+    
     $('#tchat-box').append(resp_div);
 }

@@ -41,6 +41,7 @@ function insertQuestionInPage(texte) {
 }
 
 function insertResponseInPage(query_resp) {
+    console.log(query_resp);
     let resp_div = document.createElement('div');
     let map_div = document.createElement('div');
     let map_iframe = document.createElement('iframe');

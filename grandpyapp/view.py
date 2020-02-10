@@ -1,6 +1,7 @@
 from random import randint
 
 from flask import Flask, render_template, request, config
+from flask_cors import CORS
 import config
 
 from .classes.apis import GoogleApi, WikiApi
@@ -8,6 +9,8 @@ from .classes.parser import Parser
 
 app = Flask(__name__)
 app.config.from_object('config')
+
+CORS(app)
 
 @app.route('/')
 @app.route('/index/')

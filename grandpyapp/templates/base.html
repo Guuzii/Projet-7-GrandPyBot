@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
 
@@ -23,13 +23,7 @@
     <script src="https://use.fontawesome.com/470b91f216.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
     <script src="{{ url_for('static', filename='js/jquery/jquery.min.js') }}"></script>
 
 </head>
@@ -44,17 +38,15 @@
                   <a class="navbar-brand" href="/">GrandPy Bot !</a>
             </div>
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
+            <!-- Collect the nav links, forms, and other content for toggling
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li class="hidden">
                         <a href="#page-top"></a>
                     </li>
                 </ul>
-            </div>
-            <!-- /.navbar-collapse -->
+            </div> -->
         </div>
-        <!-- /.container-fluid -->
     </nav>
 
     <header>
@@ -67,8 +59,6 @@
             </div>
         </div>
     </header>
-
-    <!-- <iframe width="600" height="450" frameborder="0" style="border:0" src="https://www.google.com/maps/embed/v1/place?q=connais adresse openclassrooms&key=AIzaSyDP9USsAbkxBmQibnOAYxTnDA01uXyUWRU" allowfullscreen></iframe> -->
 
     <section id="question-answer" class="page-section">
         <div id="tchat-box" class="container">
@@ -102,19 +92,11 @@
                         <a href="https://github.com/Guuzii/Projet-7-GrandPyBot" class="btn-social btn-outline" target="_blank"><span class="sr-only">Github</span><i class="fa fa-fw fa-github"></i></a>
                         <hr class="star-light">
                         <span class="italic">Copyright &copy; Erwan MORIO</span>
-                        <!-- <p style="font-style:italic; font-size: 14px;"><a href="https://startbootstrap.com/template-overviews/freelancer/">Thème de StartBootstrap</a></p> -->
                     </div>
                 </div>
             </div>
         </div>
     </footer>
-
-    <!-- Scroll to Top Button (Only visible on small and extra-small screen sizes) -->
-    <!-- <div class="scroll-top page-scroll hidden-sm hidden-xs hidden-lg hidden-md">
-        <a class="btn btn-primary" href="#page-top">
-            <i class="fa fa-chevron-up"></i>
-        </a>
-    </div> -->
 
     <!-- Bootstrap Core JavaScript -->
     <script src="{{ url_for('static', filename='js/bootstrap/bootstrap.min.js') }}"></script>
@@ -125,6 +107,7 @@
     <!-- Theme JavaScript -->
     <script src="{{ url_for('static', filename='js/freelancer-theme.min.js') }}"></script>
 
+    <!-- App Javascript -->
     <script src="{{ url_for('static', filename='js/grandpy.js') }}"></script>
 
 </body>

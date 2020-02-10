@@ -21,17 +21,16 @@ def index():
 
 @app.route('/api', methods=['POST'])
 def api():
+    print("TEST !!!!!!! : route /api !!")
     user_question = request.form['question']
 
     parsed_question = Parser().parseUserQuestion(user_question)
     adress = GoogleApi().getPlaceCoordinnate(parsed_question)
 
     if (adress):
-        wikiApi = WikiApi()
-
         return {
             'adress': adress['adress'],
-            'texte': wikiApi.getDataFromPlace(adress['latitude'], adress['longitude']),
+            'texte': WikiApi().getDataFromPlace(adress['latitude'], adress['longitude']),
             'map_query': parsed_question
         }        
     else:

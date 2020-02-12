@@ -29,12 +29,17 @@ def api():
         if (parsed_question.strip()):
             adress = GoogleApi().getPlaceCoordinnate(parsed_question)
 
+            print(adress)
+
             if (adress):
                 return {
-                    'adress': adress['adress'],
-                    'texte': WikiApi().getDataFromPlace(adress['latitude'], adress['longitude']),
-                    'map_query': parsed_question
-                }        
+                    'texte': str(adress)
+                }
+                # return {
+                #     'adress': adress['adress'],
+                #     'texte': WikiApi().getDataFromPlace(adress['latitude'], adress['longitude']),
+                #     'map_query': parsed_question
+                # }        
             else:
                 return {
                     'texte': 'GoogleApi response == null'

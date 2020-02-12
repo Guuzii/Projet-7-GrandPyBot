@@ -22,7 +22,7 @@ class GoogleApi:
                 'longitude': str(places_result['results'][0]['geometry']['location']['lng'])
             }
         else:
-            return None
+            return places_result
 
 
 class WikiApi:

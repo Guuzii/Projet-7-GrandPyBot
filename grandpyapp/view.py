@@ -33,7 +33,7 @@ def api():
 
             if (adress):
                 return {
-                    'texte': str(adress)
+                    'texte': 'parsed_question = ' +  parsed_question + 'request response = ' + str(adress)
                 }
                 # return {
                 #     'adress': adress['adress'],

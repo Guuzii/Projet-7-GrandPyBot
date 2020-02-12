@@ -15,14 +15,14 @@ class GoogleApi:
         # Places request to get coordinate
         places_result = self.gmaps.places(place)
 
-        if (len(places_result['results']) > 0):      
+        if (places_result['status'] == 'OK'):      
             return {
                 'adress': places_result['results'][0]['formatted_address'],
                 'latitude': str(places_result['results'][0]['geometry']['location']['lat']),
                 'longitude': str(places_result['results'][0]['geometry']['location']['lng'])
             }
         else:
-            return places_result
+            return places_result #None
 
 
 class WikiApi:

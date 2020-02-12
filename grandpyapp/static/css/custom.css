@@ -49,6 +49,13 @@ footer hr.star-light:after {
   justify-content: center;
 }
 
+#loading-spinner {
+  display: none;
+  justify-content: center;
+  margin-top: 50px;
+  cursor: wait;
+}
+
 @media (min-width: 768px) {
   .card #user-name {
     margin-top: 34%;

@@ -66,6 +66,9 @@
                 <p class="text-left">{{ grandPy_hello }}</p>
             </div>
         </div>
+        <div id="loading-spinner" class="container">
+            <img src="{{ url_for('static', filename='img/ajax-loader.gif') }}" alt="loading gif">
+        </div>
     </section>
     
     <section id="form-question" class="page-section">
@@ -78,7 +81,7 @@
                             <input type="text" name="question" id="question" class="form-control" placeholder="Votre question ?"></input>
                         </div>                        
                     </div>
-                    <button type="button" id="send-button" class="btn btn-primary" style="max-width: 85px; align-self: center;">Envoyer</button>  
+                    <button type="button" id="send-button" class="btn btn-primary" style="max-width: 85px; align-self: center;" ng-disabled="loading">Envoyer</button>  
                 </form>
             </div>
         </div>

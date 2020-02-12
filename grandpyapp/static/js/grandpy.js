@@ -18,6 +18,8 @@ function postQuestionToApi() {
 
     insertQuestionInPage(question);
 
+    $('#loading-spinner').css('display', 'flex');
+
     $.post(
         '/api', // Le fichier cible côté serveur.
         {
@@ -70,11 +72,15 @@ function insertResponseInPage(query_resp) {
         map_div.setAttribute('class', 'map-container');
         map_div.append(map_iframe);
 
+        $('#loading-spinner').hide();
+
         resp_div.append(resp, map_div);
     }
     else 
     {
         resp.innerText = query_resp['texte'];
+
+        $('#loading-spinner').hide();
 
         resp_div.append(resp);
     }

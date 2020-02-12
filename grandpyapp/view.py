@@ -25,6 +25,7 @@ def api():
 
     if (user_question.strip()):
         parsed_question = Parser().parseUserQuestion(user_question)
+        print (parsed_question)
         adress = GoogleApi().getPlaceCoordinnate(parsed_question)
 
         if (adress):

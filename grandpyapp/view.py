@@ -25,18 +25,23 @@ def api():
 
     if (user_question.strip()):
         parsed_question = Parser().parseUserQuestion(user_question)
-        print (parsed_question)
-        adress = GoogleApi().getPlaceCoordinnate(parsed_question)
 
-        if (adress):
-            return {
-                'adress': adress['adress'],
-                'texte': WikiApi().getDataFromPlace(adress['latitude'], adress['longitude']),
-                'map_query': parsed_question
-            }        
+        if (parsed_question.strip()):
+            adress = GoogleApi().getPlaceCoordinnate(parsed_question)
+
+            if (adress):
+                return {
+                    'adress': adress['adress'],
+                    'texte': WikiApi().getDataFromPlace(adress['latitude'], adress['longitude']),
+                    'map_query': parsed_question
+                }        
+            else:
+                return {
+                    'texte': 'GoogleApi response == null'
+                }
         else:
             return {
-                'texte': 'GoogleApi response == null'
+                'texte': 'Parsed question is empty'
             }
     else:
         return {

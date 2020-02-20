@@ -1,7 +1,13 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+    Module that handle the routing of the app.
+"""
+
 from random import randint
 
 from flask import Flask, render_template, request, config
-from flask_cors import CORS
 import config
 
 from .classes.apis import GoogleApi, WikiApi
@@ -9,8 +15,6 @@ from .classes.parser import Parser
 
 app = Flask(__name__)
 app.config.from_object('config')
-
-CORS(app)
 
 @app.route('/')
 @app.route('/index/')
@@ -21,6 +25,12 @@ def index():
 
 @app.route('/api', methods=['POST'])
 def api():
+    """
+        Get the question from the request, try to parse it and request the APIs.
+
+        Returns:
+            - (dict): a dictionary tha contains datas depending from the question of the user
+    """
     user_question = request.form['question']
 
     if (user_question.strip()):
@@ -29,24 +39,24 @@ def api():
         if (parsed_question.strip()):
             adress = GoogleApi().getPlaceCoordinnate(parsed_question)
 
-            print(adress)
-
             if (adress):
-                return {
-                    'texte': 'parsed_question = ' +  parsed_question + '|| request response = ' + str(adress)
-                }
+                # Uncomment for debug
                 # return {
-                #     'adress': adress['adress'],
-                #     'texte': WikiApi().getDataFromPlace(adress['latitude'], adress['longitude']),
-                #     'map_query': parsed_question
-                # }        
+                #     'texte': 'parsed_question = ' +  parsed_question + '  ||  request response = ' + str(adress)
+                # }
+
+                return {
+                    'adress': adress['adress'],
+                    'texte': WikiApi().getDataFromPlace(adress['latitude'], adress['longitude']),
+                    'map_query': parsed_question
+                }        
             else:
                 return {
-                    'texte': 'GoogleApi response == null'
+                    'texte': 'Je n\'ai rien trouvé par rapport à votre question'
                 }
         else:
             return {
-                'texte': 'Parsed question is empty'
+                'texte': 'Je n\'ai pas saisie la question...'
             }
     else:
         return {
@@ -55,6 +65,12 @@ def api():
 
 
 def getGrandPyGreating():
+    """
+        Get a random message from GRANDPY_GREATINGS in config and return it.
+
+        Returns:
+            - (str): the rand message picked
+    """
     greating_index = randint(0, len(config.GRANDPY_GREATINGS) - 1)
     return config.GRANDPY_GREATINGS[greating_index]
 

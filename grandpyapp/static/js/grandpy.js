@@ -12,7 +12,6 @@ $('#send-button').click(() => {
     postQuestionToApi();    
 });
 
-
 function postQuestionToApi() {
     let question  = $('#question').val();
 
@@ -71,18 +70,20 @@ function insertResponseInPage(query_resp) {
 
         map_div.setAttribute('class', 'map-container');
         map_div.append(map_iframe);
-
-        $('#loading-spinner').hide();
-
-        resp_div.append(resp, map_div);
+        
+        setTimeout(() => {
+            $('#loading-spinner').hide();
+            resp_div.append(resp, map_div);
+        }, 1000);
     }
     else 
     {
         resp.innerText = query_resp['texte'];
 
-        $('#loading-spinner').hide();
-
-        resp_div.append(resp);
+        setTimeout(() => {
+            $('#loading-spinner').hide();
+            resp_div.append(resp);
+        }, 1000);
     }
     
     $('#tchat-box').append(resp_div);

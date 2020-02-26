@@ -1,3 +1,4 @@
+// Prevent default action on pressing enter key and make it call postQuestionToApi() instead.
 $('#form-question :input').on('keypress', (e) => {
     let keycode = e.keyCode || e.which;
 
@@ -8,34 +9,37 @@ $('#form-question :input').on('keypress', (e) => {
     }
 });
 
+// Listening to click event on the send button. Call postQuestionToApi().
 $('#send-button').click(() => {
     postQuestionToApi();    
 });
 
+// Get question entered by the user and send a post request to the route /api using jquery
 function postQuestionToApi() {
     let question  = $('#question').val();
 
     insertQuestionInPage(question);
 
-    $('#loading-spinner').css('display', 'flex');
+    $('#loading-spinner').css('display', 'flex'); // show loading spinner
 
     $.post(
-        '/api', // Le fichier cible côté serveur.
+        '/api', // targeted file on server
         {
-            question : question // Paire clé: valeur à transmettre via la requete
+            question : question // data to send with request (key: value)
         },
-        insertResponseInPage, // Nous renseignons uniquement le nom de la fonction de retour.
-        'json' // Format des données reçues.
+        insertResponseInPage, // name of the function that will handle the response
+        'json' // data format from the response
     );    
 }
 
+// Insert user's question in the view
 function insertQuestionInPage(texte) {
 
     let div = document.createElement('div');
     let sep = document.createElement('hr');
     let question = document.createElement('p');
 
-    if (texte && texte.replace(/\s/g, "") != "")
+    if (texte && texte.replace(/\s/g, "") != "") // Check if question is not null or empty
     {
         question.innerText = texte;
     }
@@ -50,6 +54,7 @@ function insertQuestionInPage(texte) {
     $('#tchat-box').append(div);
 }
 
+// Insert texte depending on the response from the request
 function insertResponseInPage(query_resp) {
     
     let resp_div = document.createElement('div');
@@ -71,7 +76,7 @@ function insertResponseInPage(query_resp) {
         map_div.setAttribute('class', 'map-container');
         map_div.append(map_iframe);
         
-        setTimeout(() => {
+        setTimeout(() => { // hide loading spinner after 1 second
             $('#loading-spinner').hide();
             resp_div.append(resp, map_div);
         }, 1000);
@@ -80,7 +85,7 @@ function insertResponseInPage(query_resp) {
     {
         resp.innerText = query_resp['texte'];
 
-        setTimeout(() => {
+        setTimeout(() => { // hide loading spinner after 1 second
             $('#loading-spinner').hide();
             resp_div.append(resp);
         }, 1000);

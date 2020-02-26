@@ -8,13 +8,16 @@
         - GoogleMaps API
         - Wikimedia API
 """
-
+import os
 import json
 import requests
 
 import googlemaps
 
 import config
+
+if "GOOGLE_API_KEY" not in os.environ:
+    import apiKey
 
 
 class GoogleApi:
@@ -26,9 +29,12 @@ class GoogleApi:
         Attributes:
             - gmaps: the client identified with an API key used to request the API
     """
-    def __init__(self):
-        self.gmaps = googlemaps.Client(key=config.GOOGLE_API_KEY)
 
+    def __init__(self):
+        if "GOOGLE_API_KEY" in os.environ:
+            self.gmaps = googlemaps.Client(key=os.environ["GOOGLE_API_KEY"])
+        else:
+            self.gmaps = googlemaps.Client(key=apiKey.GOOGLE_API_KEY)
 
     def getPlaceCoordinnate(self, place: str):
         """
@@ -40,14 +46,18 @@ class GoogleApi:
             Returns:
                 - (dict): a dictionary containing the adress, the latitude and the longitude present in the response for the request
         """
-        
+
         places_result = self.gmaps.places(place)
 
-        if (places_result['status'] == 'OK'):      
+        if places_result["status"] == "OK":
             return {
-                'adress': places_result['results'][0]['formatted_address'],
-                'latitude': str(places_result['results'][0]['geometry']['location']['lat']),
-                'longitude': str(places_result['results'][0]['geometry']['location']['lng'])
+                "adress": places_result["results"][0]["formatted_address"],
+                "latitude": str(
+                    places_result["results"][0]["geometry"]["location"]["lat"]
+                ),
+                "longitude": str(
+                    places_result["results"][0]["geometry"]["location"]["lng"]
+                ),
             }
         else:
             return None
@@ -59,7 +69,8 @@ class WikiApi:
 
         Use Wikimedia API to get information depending on coordinate.
     """
-    def __init__(self):        
+
+    def __init__(self):
         pass
 
     def getDataFromPlace(self, lat: str, lng: str):
@@ -74,24 +85,28 @@ class WikiApi:
                 - (str): a text extract from the page found with the specified coordinate 
         """
         params = {
-            'action': 'query',
-            'prop': 'extracts',
-            'exintro': 'true',
-            'explaintext': 'true',
-            'generator': 'geosearch',
-            'ggsradius': 500,
-            'ggslimit': 1,
-            'ggscoord': lat + '|' + lng,
-            'format': 'json'
+            "action": "query",
+            "prop": "extracts",
+            "exintro": "true",
+            "explaintext": "true",
+            "generator": "geosearch",
+            "ggsradius": 500,
+            "ggslimit": 1,
+            "ggscoord": lat + "|" + lng,
+            "format": "json",
         }
 
         res = requests.get(url=config.WIKIPEDIA_API_ENDPOINT, params=params)
-        
+
         try:
-            wikimedia_result = res.json()['query']['pages']
+            wikimedia_result = res.json()["query"]["pages"]
         except:
-            return 'Je n\'ai rien trouvé dans un rayon de ' + str(params['ggsradius']) + ' mètres.'
+            return (
+                "Je n'ai rien trouvé dans un rayon de "
+                + str(params["ggsradius"])
+                + " mètres."
+            )
 
         page_id = list(wikimedia_result)[0]
 
-        return 'Savais-tu que ' + wikimedia_result[page_id]['extract']
+        return "Savais-tu que " + wikimedia_result[page_id]["extract"]

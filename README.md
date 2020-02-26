@@ -1,6 +1,6 @@
 # Projet-7-GrandPyBot
 
-Web app made with Flask that uses Google Maps and Media Wiki API to answer questions from the user about a location and telling a story about it.
+Web app made with Flask that uses Google Maps and Media Wiki API to answer questions from the user about a location and giving information about that place with the data from wikipedia.
 This programm has been developped for a python course.
 
 ## Requirements
@@ -11,4 +11,17 @@ This programm has been developped for a python course.
 
 ## Installation
 
+    - Clone the project, 
+    - setup virtual env : pipenv --python 3.7
+    - get into your virtual env : pipenv shell
+    - install requirements : pipenv install
+    - run locally : python main.py
+
+The app need either an environment variable called 'GOOGLE_API_KEY' containing your api key or file apiKey.py containing this variable.
+
 ## Usage
+
+Get to the url where your app is deploy.
+The bot welcome you with a sentence.
+Enter your question in the text input and click "envoyer" or press enter.
+The bot give you an answer appropriate for your question followed by a map of the location if he found one.

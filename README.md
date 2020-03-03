@@ -8,10 +8,13 @@ This programm has been developped for a python course.
     - Python 3.7
     - Pip
     - Pipenv
+    - A valid google api key
 
 ## Installation
 
-    - Clone the project, 
+    - Clone the project,
+    - Create a file named apiKey.py at the root of the directory
+    - Add in the created file apiKey.py a variable named GOOGLE_API_KEY containing your api key
     - setup virtual env : pipenv --python 3.7
     - get into your virtual env : pipenv shell
     - install requirements : pipenv install
